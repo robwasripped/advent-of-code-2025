@@ -26,13 +26,16 @@ class Day2Command
         $output->writeln(\sprintf('Found %u ranges', \count($rangeStrings)));
 
         $sum = 0;
+        $sumRepeated = 0;
         foreach ($rangeStrings as $rangeString) {
             list($from, $to) = \explode('-', $rangeString);
 
-            $sum += \array_sum($this->invalidProductFinder->findInvalidProducts(\range($from, $to)));
+            $sum += \array_sum($this->invalidProductFinder->findInvalidProducts($range = \range($from, $to)));
+            $sumRepeated += \array_sum($this->invalidProductFinder->findInvalidProductsRepeated($range));
         }
 
         $output->writeln("Sum: $sum");
+        $output->writeln("Sum repeated: $sumRepeated");
         
         return 0;
     }

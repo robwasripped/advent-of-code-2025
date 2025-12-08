@@ -12,4 +12,11 @@ class InvalidProductFinder {
             $range,
         ));
     }
+
+    public function findInvalidProductsRepeated(array $range): array {
+        return \array_values(\preg_grep(
+            '/^([1-9]\d*)\1+$/',
+            $range,
+        ));
+    }
 }

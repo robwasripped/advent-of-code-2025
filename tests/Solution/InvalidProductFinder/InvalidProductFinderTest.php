@@ -38,4 +38,32 @@ class InvalidProductFinderTest extends TestCase
             [\range(2121212118, 2121212124), []],
         ];
     }
+
+    #[Test]
+    #[DataProvider('rangeRepeatedProvider')]
+    public function findInvalidProductsRepeated_produces_expected_sum(array $range, array $expectedResult): void
+    {
+        $invalidProductFinder = new InvalidProductFinder();
+
+        $result = $invalidProductFinder->findInvalidProductsRepeated($range);
+
+        self::assertSame($expectedResult, $result);
+    }
+
+    public static function rangeRepeatedProvider(): array
+    {
+        return [
+            [\range(11, 22), [11, 22]],
+            [\range(95, 115), [99, 111]],
+            [\range(998, 1012), [999, 1010]],
+            [\range(1188511880, 1188511890), [1188511885]],
+            [\range(222220, 222224), [222222]],
+            [\range(1698522, 1698528), []],
+            [\range(446443, 446449), [446446]],
+            [\range(38593856, 38593862), [38593859]],
+            [\range(565653, 565659), [565656]],
+            [\range(824824821, 824824827), [824824824]],
+            [\range(2121212118, 2121212124), [2121212121]],
+        ];
+    }
 }
